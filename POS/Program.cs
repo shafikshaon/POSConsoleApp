@@ -10,6 +10,9 @@ namespace POS
     {
         static void Main(string[] args)
         {
+            Pos pos = new Pos();
+            pos.DefaultInit();
+            pos.Begin();
         }
     }
 }
