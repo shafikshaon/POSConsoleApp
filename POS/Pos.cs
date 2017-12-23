@@ -18,7 +18,7 @@ namespace POS
         public List<Item> Items;
         public Dictionary<int, BoughtItem> BoughtItems;
         public Dictionary<int, int> StockItem = new Dictionary<int, int>();
-        public int sum = 0;
+        public int Sum = 0;
 
         public string LoginChoicePrompt = "Enter your choice for login";
         public string LoginChoiceErrorPrompt = "Wrong choice. Please try again for login";
@@ -28,50 +28,53 @@ namespace POS
         public string QuantityErrorPrompt = "Wrong choice! Try again";
         public string BuyPrompt = "What you want to buy";
         public string BuyErrorPrompt = "Wrong choice! Try again";
+        public string ViewCartPrompt = "Enter 0 for view cart";
+        public string ItemNotFound = "Item not found! Try again";
 
         public void Begin()
         {
             Console.WriteLine("Enter 0 for login as admin or 1 for login as customer");
             int loginChoice = TakeUserInput(LoginChoicePrompt, LoginChoiceErrorPrompt);
-            if (loginChoice == 0)
+            switch (loginChoice)
             {
-                Console.WriteLine("Login as Admin");
-                DisplayItem();
-                AdminOperation();
-            }
-            else if (loginChoice == 1)
-            {
-                Console.WriteLine("Login as Customer");
-                CustomerOperation();
-            }
-            else
-            {
-                Begin();
+                case 0:
+                    Console.WriteLine("Login as Admin");
+                    DisplayItem();
+                    AdminOperation();
+                    break;
+                case 1:
+                    Console.WriteLine("Login as Customer");
+                    CustomerOperation();
+                    break;
+                default:
+                    Begin();
+                    break;
             }
         }
-        private void CustomerOperation()
+        public void CustomerOperation()
         {
             DisplayItem();
-            Console.WriteLine("Enter 0 for view cart");
+            Console.WriteLine(ViewCartPrompt);
             int choice = TakeUserInput(BuyPrompt, BuyErrorPrompt);
 
-            if (choice == 0)
+            switch (choice)
             {
-                DisplayCart(BoughtItems);
-            }
-            else
-            {
-                Item getItem = GetItem(choice);
-                if (getItem == null)
-                {
-                    Console.WriteLine("Item not found! Try again");
-                    CustomerOperation();
-                }
-                else
-                {
-                    AddToCart(getItem);
-                    DisplayItem();
-                }
+                case 0:
+                    DisplayCart(BoughtItems);
+                    break;
+                default:
+                    Item getItem = GetItem(choice);
+                    if (getItem == null)
+                    {
+                        Console.WriteLine(ItemNotFound);
+                        CustomerOperation();
+                    }
+                    else
+                    {
+                        AddToCart(getItem);
+                        DisplayItem();
+                    }
+                    break;
             }
         }
         public Item GetItem(int choice)
@@ -106,7 +109,7 @@ namespace POS
         {
             if (!BoughtItems.ContainsKey(item.Id))
             {
-                BoughtItems.Add(item.Id, new BoughtItem() { Id = item.Id, Quantity = quantity, Item = item });
+                BoughtItems.Add(item.Id, new BoughtItem { Id = item.Id, Quantity = quantity, Item = item });
             }
             else
             {
@@ -120,7 +123,7 @@ namespace POS
             Console.WriteLine("Item\t\tQuantity\t\tUnit Price\t\tSum");
             foreach (var pair in boughtItemList)
             {
-                sum += pair.Value.Quantity;
+                Sum += pair.Value.Quantity;
                 int price = pair.Value.Quantity * pair.Value.Item.ItemPrice;
                 Console.WriteLine(pair.Value.Item.ItemName + "\t\t" + pair.Value.Quantity + "\t\t\t" + pair.Value.Item.ItemPrice + "\t\t\t" + price);
                 total += price;
@@ -140,7 +143,7 @@ namespace POS
                 Begin();
             }
         }
-        private void AdminOperation()
+        public void AdminOperation()
         {
             Console.WriteLine("Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout");
             int adminChoice = TakeUserInput(AdminChoicePrompt, AdminChoiceErrorPrompt);
@@ -166,9 +169,9 @@ namespace POS
                     break;
             }
         }
-        private void AddItem()
+        public void AddItem()
         {
-            Console.Write("Enter item name: ");
+            Console.WriteLine("Enter item name: ");
             string name = Console.ReadLine();
             int price = TakeUserInput("Enter price", "Wrong! Enter correct price");
             int quantity = TakeUserInput("Enter quantity", "Wrong! Enter correct quantity");
@@ -177,7 +180,7 @@ namespace POS
             Console.WriteLine("Item added successfully");
             AdminOperation();
         }
-        private void UpdateItem()
+        public void UpdateItem()
         {
             var input = TakeUserInput("Select item to add stock", AdminChoicePrompt);
             if (input != 4)
@@ -199,13 +202,12 @@ namespace POS
                 DisplayItem();
             AdminOperation();
         }
-        private void DisplayItem()
+        public void DisplayItem()
         {
             Console.WriteLine("Products");
             Console.WriteLine("===========================");
             Console.WriteLine("No\tItem\t\tPrice\t InStock");
             Console.WriteLine("---------------------------------------------");
-
             foreach (var item in Items)
             {
                 Console.WriteLine(item.Id + "\t" + item.ItemName + "\t\t" + item.ItemPrice + "\t" + item.ItemStock);
@@ -213,12 +215,12 @@ namespace POS
         }
         public void DefaultInit()
         {
-            Items = new List<Item>()
+            Items = new List<Item>
             {
-                new Item(){ Id = 1, ItemName = "Pen", ItemPrice = 5, ItemStock = 10 },
-                new Item(){ Id = 2, ItemName = "Book", ItemPrice = 100, ItemStock = 15 },
-                new Item(){ Id = 3, ItemName = "Rice", ItemPrice = 50, ItemStock = 20 },
-                new Item(){ Id = 4, ItemName = "Cap", ItemPrice = 25, ItemStock = 10 }
+                new Item{ Id = 1, ItemName = "Pen", ItemPrice = 5, ItemStock = 10 },
+                new Item{ Id = 2, ItemName = "Book", ItemPrice = 100, ItemStock = 15 },
+                new Item{ Id = 3, ItemName = "Rice", ItemPrice = 50, ItemStock = 20 },
+                new Item{ Id = 4, ItemName = "Cap", ItemPrice = 25, ItemStock = 10 }
             };
             BoughtItems = new Dictionary<int, BoughtItem>();
         }
