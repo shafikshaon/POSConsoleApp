@@ -56,3 +56,9 @@ You have to update the items in stock after each purchase.
 Next add an admin part to the application. The admin will be able to update stock and create new item.
 So the initial screen of the application should be:
 For Admin press 0, For customer press 1
+
+# Installation
+
+`git clone https://github.com/shafikshaon/POSConsoleApp.git`
+
+Open up on Visual Studio and Build it. :+1:
