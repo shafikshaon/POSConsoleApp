@@ -22,6 +22,7 @@ namespace POS
             if (loginChoice == 0)
             {
                 Console.WriteLine("Login as Admin");
+                DisplayItem();
             }
             else if (loginChoice == 1)
             {
@@ -32,6 +33,20 @@ namespace POS
                 Begin();
             }
         }
+
+        private void DisplayItem()
+        {
+            Console.WriteLine("Products");
+            Console.WriteLine("===========================");
+            Console.WriteLine("No\tItem\t\tPrice\t InStock");
+            Console.WriteLine("---------------------------------------------");
+
+            foreach (var item in Items)
+            {
+                Console.WriteLine(item.Id + "\t" + item.ItemName + "\t\t" + item.ItemPrice + "\t" + item.ItemStock);
+            }
+        }
+
         public void DefaultInit()
         {
             Items = new List<Item>()
