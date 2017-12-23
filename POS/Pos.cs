@@ -18,6 +18,7 @@ namespace POS
         public List<Item> Items;
         public Dictionary<int, BoughtItem> BoughtItems;
         public Dictionary<int, int> StockItem = new Dictionary<int, int>();
+        public int sum = 0;
 
         public string LoginChoicePrompt = "Enter your choice for login";
         public string LoginChoiceErrorPrompt = "Wrong choice. Please try again for login";
@@ -56,7 +57,7 @@ namespace POS
 
             if (choice == 0)
             {
-               
+                DisplayCart(BoughtItems);
             }
             else
             {
@@ -103,7 +104,6 @@ namespace POS
         }
         public void StockCheck(Item item, int quantity)
         {
-
             if (!BoughtItems.ContainsKey(item.Id))
             {
                 BoughtItems.Add(item.Id, new BoughtItem() { Id = item.Id, Quantity = quantity, Item = item });
@@ -111,6 +111,33 @@ namespace POS
             else
             {
                 BoughtItems[item.Id].Quantity += quantity;
+            }
+        }
+        public void DisplayCart(Dictionary<int, BoughtItem> boughtItemList)
+        {
+            int total = 0;
+            Console.WriteLine("\n-----------------------------------------Display Cart---------------------------------------\n");
+            Console.WriteLine("Item\t\tQuantity\t\tUnit Price\t\tSum");
+            foreach (var pair in boughtItemList)
+            {
+                sum += pair.Value.Quantity;
+                int price = pair.Value.Quantity * pair.Value.Item.ItemPrice;
+                Console.WriteLine(pair.Value.Item.ItemName + "\t\t" + pair.Value.Quantity + "\t\t\t" + pair.Value.Item.ItemPrice + "\t\t\t" + price);
+                total += price;
+            }
+            Console.WriteLine("--------------------------------------------------------------------------------------------");
+            Console.WriteLine("Total Payment\t\t\t\t\t\t\t{0}", total);
+
+            Console.WriteLine("\nFor shop again enter 0 or logout enter 1");
+            int choice = TakeUserInput("Enter your choice", "Wrong input");
+            if (choice == 0)
+            {
+                DisplayItem();
+                CustomerOperation();
+            }
+            else
+            {
+                Begin();
             }
         }
         private void AdminOperation()
