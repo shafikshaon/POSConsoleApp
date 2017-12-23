@@ -8,10 +8,10 @@ namespace POS
 {
     public enum AdminOperation
     {
-        AddItem,
-        UpdateItem,
-        DisplayItem,
-        Logout
+        AddItem = 1,
+        UpdateItem = 2,
+        DisplayItem = 3,
+        Logout = 4
     }
     class Pos
     {
@@ -73,7 +73,14 @@ namespace POS
 
         private void AddItem()
         {
-            throw new NotImplementedException();
+            Console.Write("Enter item name: ");
+            string name = Console.ReadLine();
+            int price = TakeUserInput("Enter price", "Wrong! Enter correct price");
+            int quantity = TakeUserInput("Enter quantity", "Wrong! Enter correct quantity");
+
+            Items.Add(new Item { Id = Items.Count + 1, ItemName = name, ItemPrice = price, ItemStock = quantity });
+            Console.WriteLine("Item added successfully");
+            AdminOperation();
         }
 
         private void UpdateItem()
