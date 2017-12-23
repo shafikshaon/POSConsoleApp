@@ -56,7 +56,7 @@ namespace POS
 
             if (choice == 0)
             {
-                DisplayCart(BoughtItems);
+               
             }
             else
             {
@@ -81,6 +81,37 @@ namespace POS
                     return t;
             }
             return null;
+        }
+        public void AddToCart(Item item)
+        {
+            string itemName = item.ItemName;
+            Console.Write("Item {0} found. ", itemName);
+            int quantity = TakeUserInput(QuantityInputPrompt, QuantityErrorPrompt);
+
+            if (item.ItemStock >= quantity)
+            {
+                Console.WriteLine("Product buy");
+                StockCheck(item, quantity);
+                item.ItemStock -= quantity;
+                CustomerOperation();
+            }
+            else
+            {
+                Console.WriteLine("{0} {1}", quantity, itemName + " is not in stock");
+                CustomerOperation();
+            }
+        }
+        public void StockCheck(Item item, int quantity)
+        {
+
+            if (!BoughtItems.ContainsKey(item.Id))
+            {
+                BoughtItems.Add(item.Id, new BoughtItem() { Id = item.Id, Quantity = quantity, Item = item });
+            }
+            else
+            {
+                BoughtItems[item.Id].Quantity += quantity;
+            }
         }
         private void AdminOperation()
         {
