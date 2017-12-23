@@ -23,6 +23,8 @@ namespace POS
         public string LoginChoiceErrorPrompt = "Wrong choice. Please try again for login";
         public string AdminChoiceErrorPrompt = "Wrong choice! Try again";
         public string AdminChoicePrompt = "Enter your choice";
+        public string QuantityInputPrompt = "Enter quantity";
+        public string QuantityErrorPrompt = "Wrong choice! Try again";
 
         public void Begin()
         {
@@ -85,7 +87,25 @@ namespace POS
 
         private void UpdateItem()
         {
-            throw new NotImplementedException();
+            var input = TakeUserInput("Select item to add stock", AdminChoicePrompt);
+            if (input != 4)
+                if (input <= Items.Count)
+                {
+                    int quantity = TakeUserInput(QuantityInputPrompt, QuantityErrorPrompt);
+                    if (quantity > 0)
+                        if (Items != null) Items[input - 1].ItemStock += quantity;
+                    DisplayItem();
+                    AdminOperation();
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine(AdminChoiceErrorPrompt);
+                    AdminOperation();
+                }
+            else
+                DisplayItem();
+            AdminOperation();
         }
 
         private void DisplayItem()
