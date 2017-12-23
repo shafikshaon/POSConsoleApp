@@ -25,6 +25,8 @@ namespace POS
         public string AdminChoicePrompt = "Enter your choice";
         public string QuantityInputPrompt = "Enter quantity";
         public string QuantityErrorPrompt = "Wrong choice! Try again";
+        public string BuyPrompt = "What you want to buy";
+        public string BuyErrorPrompt = "Wrong choice! Try again";
 
         public void Begin()
         {
@@ -39,13 +41,47 @@ namespace POS
             else if (loginChoice == 1)
             {
                 Console.WriteLine("Login as Customer");
+                CustomerOperation();
             }
             else
             {
                 Begin();
             }
         }
+        private void CustomerOperation()
+        {
+            DisplayItem();
+            Console.WriteLine("Enter 0 for view cart");
+            int choice = TakeUserInput(BuyPrompt, BuyErrorPrompt);
 
+            if (choice == 0)
+            {
+                DisplayCart(BoughtItems);
+            }
+            else
+            {
+                Item getItem = GetItem(choice);
+                if (getItem == null)
+                {
+                    Console.WriteLine("Item not found! Try again");
+                    CustomerOperation();
+                }
+                else
+                {
+                    AddToCart(getItem);
+                    DisplayItem();
+                }
+            }
+        }
+        public Item GetItem(int choice)
+        {
+            foreach (Item t in Items)
+            {
+                if (choice == t.Id)
+                    return t;
+            }
+            return null;
+        }
         private void AdminOperation()
         {
             Console.WriteLine("Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout");
@@ -72,7 +108,6 @@ namespace POS
                     break;
             }
         }
-
         private void AddItem()
         {
             Console.Write("Enter item name: ");
@@ -84,7 +119,6 @@ namespace POS
             Console.WriteLine("Item added successfully");
             AdminOperation();
         }
-
         private void UpdateItem()
         {
             var input = TakeUserInput("Select item to add stock", AdminChoicePrompt);
@@ -107,7 +141,6 @@ namespace POS
                 DisplayItem();
             AdminOperation();
         }
-
         private void DisplayItem()
         {
             Console.WriteLine("Products");
