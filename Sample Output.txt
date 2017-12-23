@@ -1,0 +1,166 @@
+Enter 0 for login as admin or 1 for login as customer
+Enter your choice for login
+1
+Login as Customer
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       10
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      10
+Enter 0 for view cart
+What you want to buy
+1
+Item Pen found. Enter quantity
+5
+Product buy
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       5
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      10
+Enter 0 for view cart
+What you want to buy
+1
+Item Pen found. Enter quantity
+2
+Product buy
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       3
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      10
+Enter 0 for view cart
+What you want to buy
+0
+
+-----------------------------------------Display Cart---------------------------------------
+
+Item            Quantity                Unit Price              Sum
+Pen             7                       5                       35
+--------------------------------------------------------------------------------------------
+Total Payment                                                   35
+
+For shop again enter 0 or logout enter 1
+Enter your choice
+0
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       3
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      10
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       3
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      10
+Enter 0 for view cart
+What you want to buy
+4
+Item Cap found. Enter quantity
+10
+Product buy
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       3
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      0
+Enter 0 for view cart
+What you want to buy
+0
+
+-----------------------------------------Display Cart---------------------------------------
+
+Item            Quantity                Unit Price              Sum
+Pen             7                       5                       35
+Cap             10                      25                      250
+--------------------------------------------------------------------------------------------
+Total Payment                                                   285
+
+For shop again enter 0 or logout enter 1
+Enter your choice
+1
+Enter 0 for login as admin or 1 for login as customer
+Enter your choice for login
+0
+Login as Admin
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       3
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      0
+Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout
+Enter your choice
+1
+Enter item name:
+Mobile Phone
+Enter price
+5500
+Enter quantity
+100
+Item added successfully
+Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout
+Enter your choice
+3
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       3
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      0
+5       Mobile Phone            5500    100
+Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout
+Enter your choice
+2
+Select item to add stock
+1
+Enter quantity
+154
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       157
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      0
+5       Mobile Phone            5500    100
+Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout
+Enter your choice
+3
+Products
+===========================
+No      Item            Price    InStock
+---------------------------------------------
+1       Pen             5       157
+2       Book            100     15
+3       Rice            50      20
+4       Cap             25      0
+5       Mobile Phone            5500    100
+Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout
+Enter your choice
+4
+Enter 0 for login as admin or 1 for login as customer
+Enter your choice for login
