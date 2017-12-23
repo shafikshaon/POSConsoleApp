@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace POS
 {
+    public enum AdminOperation
+    {
+        AddItem,
+        UpdateItem,
+        DisplayItem,
+        Logout
+    }
     class Pos
     {
         public List<Item> Items;
@@ -14,6 +21,8 @@ namespace POS
 
         public string LoginChoicePrompt = "Enter your choice for login";
         public string LoginChoiceErrorPrompt = "Wrong choice. Please try again for login";
+        public string AdminChoiceErrorPrompt = "Wrong choice! Try again";
+        public string AdminChoicePrompt = "Enter your choice";
 
         public void Begin()
         {
@@ -23,6 +32,7 @@ namespace POS
             {
                 Console.WriteLine("Login as Admin");
                 DisplayItem();
+                AdminOperation();
             }
             else if (loginChoice == 1)
             {
@@ -32,6 +42,43 @@ namespace POS
             {
                 Begin();
             }
+        }
+
+        private void AdminOperation()
+        {
+            Console.WriteLine("Enter 1 for Add new item 2 for update existing stock 3 for display item list 4 for logout");
+            int adminChoice = TakeUserInput(AdminChoicePrompt, AdminChoiceErrorPrompt);
+            switch (adminChoice)
+            {
+                case (int)POS.AdminOperation.AddItem:
+                    AddItem();
+                    break;
+                case (int)POS.AdminOperation.UpdateItem:
+                    UpdateItem();
+                    break;
+                case (int)POS.AdminOperation.DisplayItem:
+                    DisplayItem();
+                    AdminOperation();
+                    break;
+                case (int)POS.AdminOperation.Logout:
+                    Begin();
+                    DisplayItem();
+                    break;
+                default:
+                    Console.WriteLine(AdminChoiceErrorPrompt);
+                    AdminOperation();
+                    break;
+            }
+        }
+
+        private void AddItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateItem()
+        {
+            throw new NotImplementedException();
         }
 
         private void DisplayItem()
@@ -46,7 +93,6 @@ namespace POS
                 Console.WriteLine(item.Id + "\t" + item.ItemName + "\t\t" + item.ItemPrice + "\t" + item.ItemStock);
             }
         }
-
         public void DefaultInit()
         {
             Items = new List<Item>()
